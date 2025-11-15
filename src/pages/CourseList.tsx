@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { courses } from '../data/mockData';
 import { useData } from '../context/DataContext';
 import { StarRating } from '../components/StarRating';
-import { Search, BookOpen, Clock, Filter, Grid, List, TrendingUp, Award } from 'lucide-react';
+import { Search, Clock, Filter, Grid, List, TrendingUp, Award } from 'lucide-react';
 
 export function CourseList() {
   const [searchQuery, setSearchQuery] = useState('');

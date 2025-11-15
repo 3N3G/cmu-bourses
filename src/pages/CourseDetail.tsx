@@ -15,9 +15,9 @@ import {
   Loader2,
   CheckCircle,
   XCircle,
-  TrendingUp,
   Award,
-  Users
+  Users,
+  Shield
 } from 'lucide-react';
 
 export function CourseDetail() {
@@ -585,19 +585,67 @@ export function CourseDetail() {
                       disabled={submitting || reviewForm.overallRating === 0}
                       className="flex-1 bg-gradient-to-r from-cmu-red to-cmu-red-dark text-white px-8 py-4 rounded-xl font-bold hover:shadow-2xl hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-3"
                     >
-                      {submitting && <Loader2 size={20} className="animate-spin" />}
-                      {submitting ? 'Checking with AI...' : 'Submit Review'}
+                      {submitting ? 'Verifying...' : 'Submit Review'}
                     </button>
                     <button
                       type="button"
                       onClick={() => setShowReviewForm(false)}
                       className="px-8 py-4 rounded-xl font-bold text-gray-700 hover:bg-gray-100 transition-colors border-2 border-gray-300"
+                      disabled={submitting}
                     >
                       Cancel
                     </button>
                   </div>
                 </form>
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* Compliance Verification Loading Modal */}
+        {submitting && (
+          <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-[60] animate-fade-in">
+            <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 text-center animate-scale-in">
+              <div className="mb-6">
+                <div className="relative w-24 h-24 mx-auto">
+                  <div className="absolute inset-0 border-4 border-gray-200 rounded-full"></div>
+                  <div className="absolute inset-0 border-4 border-cmu-red rounded-full animate-spin border-t-transparent"></div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Shield className="text-cmu-red" size={32} />
+                  </div>
+                </div>
+              </div>
+
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                Verifying Compliance
+              </h3>
+
+              <div className="space-y-3 text-left">
+                <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                  <Loader2 className="text-blue-600 animate-spin flex-shrink-0" size={20} />
+                  <span className="text-sm font-medium text-blue-800">
+                    Checking FERPA compliance...
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-3 p-3 bg-purple-50 rounded-lg border border-purple-200">
+                  <Loader2 className="text-purple-600 animate-spin flex-shrink-0" size={20} />
+                  <span className="text-sm font-medium text-purple-800">
+                    Verifying {course.courseNumber} policy compliance...
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-3 p-3 bg-orange-50 rounded-lg border border-orange-200">
+                  <Loader2 className="text-orange-600 animate-spin flex-shrink-0" size={20} />
+                  <span className="text-sm font-medium text-orange-800">
+                    Scanning for academic integrity violations...
+                  </span>
+                </div>
+              </div>
+
+              <p className="mt-6 text-xs text-gray-500">
+                This may take a few seconds. Please do not close this window.
+              </p>
             </div>
           </div>
         )}
