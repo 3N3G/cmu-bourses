@@ -16,8 +16,7 @@ import {
   CheckCircle,
   XCircle,
   Award,
-  Users,
-  Shield
+  Users
 } from 'lucide-react';
 
 export function CourseDetail() {
@@ -149,7 +148,7 @@ export function CourseDetail() {
             </div>
             <button
               onClick={() => setShowReviewForm(true)}
-              className="bg-gradient-to-r from-cmu-red to-cmu-red-dark text-white px-6 py-3 rounded-xl font-bold hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2 shadow-lg"
+              className="bg-cmu-red text-white px-6 py-3 rounded-lg font-semibold hover:bg-cmu-red-dark transition-colors flex items-center gap-2"
             >
               <PenSquare size={20} />
               Write Review
@@ -453,55 +452,55 @@ export function CourseDetail() {
 
         {/* Review Form Modal */}
         {showReviewForm && (
-          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fade-in">
-            <div className="bg-white rounded-3xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto animate-scale-in">
-              <div className="sticky top-0 bg-gradient-to-r from-cmu-red to-cmu-red-dark text-white px-8 py-6 rounded-t-3xl">
-                <h2 className="text-3xl font-bold">Write a Review</h2>
-                <p className="text-white/90 mt-1">Share your experience with {course.name}</p>
+          <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', zIndex: 9999 }}>
+            <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+              <div className="border-b border-gray-200 px-6 py-4">
+                <h2 className="text-xl font-semibold text-gray-900">Write a Review</h2>
+                <p className="text-sm text-gray-600 mt-1">Share your experience with {course.name}</p>
               </div>
-              <div className="p-8">
-                <form onSubmit={handleSubmitReview} className="space-y-6">
-                  <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 border-2 border-yellow-200">
-                    <label className="block text-base font-bold text-gray-900 mb-3">
+              <div className="p-6">
+                <form onSubmit={handleSubmitReview} className="space-y-5">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-900 mb-2">
                       Overall Rating *
                     </label>
                     <StarRating
                       rating={reviewForm.overallRating}
-                      size={40}
+                      size={32}
                       interactive
                       onChange={(rating) => setReviewForm({ ...reviewForm, overallRating: rating })}
                     />
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="bg-orange-50 rounded-2xl p-6 border-2 border-orange-200">
-                      <label className="block text-base font-bold text-gray-900 mb-3">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-900 mb-2">
                         Difficulty (1=Easy, 5=Hard)
                       </label>
                       <StarRating
                         rating={reviewForm.difficultyRating}
-                        size={32}
+                        size={24}
                         interactive
                         onChange={(rating) => setReviewForm({ ...reviewForm, difficultyRating: rating })}
                       />
                     </div>
 
-                    <div className="bg-green-50 rounded-2xl p-6 border-2 border-green-200">
-                      <label className="block text-base font-bold text-gray-900 mb-3">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-900 mb-2">
                         Usefulness (1=Low, 5=High)
                       </label>
                       <StarRating
                         rating={reviewForm.usefulnessRating}
-                        size={32}
+                        size={24}
                         interactive
                         onChange={(rating) => setReviewForm({ ...reviewForm, usefulnessRating: rating })}
                       />
                     </div>
                   </div>
 
-                  <div className="bg-blue-50 rounded-2xl p-6 border-2 border-blue-200">
-                    <label className="block text-base font-bold text-gray-900 mb-3">
-                      Hours per Week: <span className="text-blue-600">{reviewForm.workloadHours}</span>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-900 mb-2">
+                      Hours per Week: <span className="font-semibold">{reviewForm.workloadHours}</span>
                     </label>
                     <input
                       type="range"
@@ -511,37 +510,37 @@ export function CourseDetail() {
                       onChange={(e) =>
                         setReviewForm({ ...reviewForm, workloadHours: parseInt(e.target.value) })
                       }
-                      className="w-full h-3 bg-blue-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                      className="w-full"
                     />
-                    <div className="flex justify-between text-xs text-blue-600 mt-2">
+                    <div className="flex justify-between text-xs text-gray-500 mt-1">
                       <span>1 hr</span>
                       <span>20 hrs</span>
                       <span>40 hrs</span>
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-bold text-gray-900 mb-2">
+                      <label className="block text-sm font-medium text-gray-900 mb-2">
                         Professor (Optional)
                       </label>
                       <input
                         type="text"
                         value={reviewForm.professorName}
                         onChange={(e) => setReviewForm({ ...reviewForm, professorName: e.target.value })}
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-cmu-red focus:border-cmu-red transition-all"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cmu-red focus:border-transparent"
                         placeholder="Prof. Name"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-bold text-gray-900 mb-2">
+                      <label className="block text-sm font-medium text-gray-900 mb-2">
                         Semester
                       </label>
                       <select
                         value={reviewForm.semester}
                         onChange={(e) => setReviewForm({ ...reviewForm, semester: e.target.value })}
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-cmu-red focus:border-cmu-red transition-all appearance-none bg-white cursor-pointer"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cmu-red focus:border-transparent"
                       >
                         <option>Fall 2024</option>
                         <option>Spring 2024</option>
@@ -552,7 +551,7 @@ export function CourseDetail() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-bold text-gray-900 mb-2">
+                    <label className="block text-sm font-medium text-gray-900 mb-2">
                       Your Review *
                       <span className={`ml-2 text-xs ${
                         reviewForm.reviewText.length < 50
@@ -567,30 +566,30 @@ export function CourseDetail() {
                     <textarea
                       value={reviewForm.reviewText}
                       onChange={(e) => setReviewForm({ ...reviewForm, reviewText: e.target.value })}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-cmu-red focus:border-cmu-red transition-all resize-none"
-                      rows={8}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cmu-red focus:border-transparent resize-none"
+                      rows={6}
                       minLength={50}
                       maxLength={2000}
                       placeholder="Share your experience... What did you learn? How was the workload? Any tips for future students?"
                       required
                     />
-                    <p className="text-xs text-gray-600 mt-2 bg-gray-50 p-3 rounded-lg border border-gray-200">
-                      <strong>Note:</strong> Minimum 50 characters. Do not share exam questions, solutions, or copyrighted materials.
+                    <p className="text-xs text-gray-500 mt-1">
+                      Minimum 50 characters. Do not share exam questions, solutions, or copyrighted materials.
                     </p>
                   </div>
 
-                  <div className="flex gap-4 pt-6 border-t-2 border-gray-200">
+                  <div className="flex gap-3 pt-4 border-t border-gray-200">
                     <button
                       type="submit"
                       disabled={submitting || reviewForm.overallRating === 0}
-                      className="flex-1 bg-gradient-to-r from-cmu-red to-cmu-red-dark text-white px-8 py-4 rounded-xl font-bold hover:shadow-2xl hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-3"
+                      className="flex-1 bg-cmu-red text-white px-4 py-2 rounded-md font-medium hover:bg-cmu-red-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {submitting ? 'Verifying...' : 'Submit Review'}
                     </button>
                     <button
                       type="button"
                       onClick={() => setShowReviewForm(false)}
-                      className="px-8 py-4 rounded-xl font-bold text-gray-700 hover:bg-gray-100 transition-colors border-2 border-gray-300"
+                      className="px-4 py-2 rounded-md font-medium text-gray-700 hover:bg-gray-100 transition-colors border border-gray-300"
                       disabled={submitting}
                     >
                       Cancel
@@ -604,47 +603,35 @@ export function CourseDetail() {
 
         {/* Compliance Verification Loading Modal */}
         {submitting && (
-          <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-[60] animate-fade-in">
-            <div className="bg-white rounded-3xl shadow-2xl max-w-md w-full p-8 text-center animate-scale-in">
-              <div className="mb-6">
-                <div className="relative w-24 h-24 mx-auto">
-                  <div className="absolute inset-0 border-4 border-gray-200 rounded-full"></div>
-                  <div className="absolute inset-0 border-4 border-cmu-red rounded-full animate-spin border-t-transparent"></div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <Shield className="text-cmu-red" size={32} />
-                  </div>
-                </div>
+          <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', zIndex: 10000 }}>
+            <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6 text-center">
+              <div className="mb-4">
+                <Loader2 className="text-cmu-red animate-spin mx-auto" size={40} />
               </div>
 
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
                 Verifying Compliance
               </h3>
 
-              <div className="space-y-3 text-left">
-                <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
-                  <Loader2 className="text-blue-600 animate-spin flex-shrink-0" size={20} />
-                  <span className="text-sm font-medium text-blue-800">
-                    Checking FERPA compliance...
-                  </span>
+              <div className="space-y-2 text-left text-sm">
+                <div className="flex items-center gap-2 text-gray-700">
+                  <Loader2 className="text-gray-400 animate-spin flex-shrink-0" size={16} />
+                  <span>Checking FERPA compliance...</span>
                 </div>
 
-                <div className="flex items-center gap-3 p-3 bg-purple-50 rounded-lg border border-purple-200">
-                  <Loader2 className="text-purple-600 animate-spin flex-shrink-0" size={20} />
-                  <span className="text-sm font-medium text-purple-800">
-                    Verifying {course.courseNumber} policy compliance...
-                  </span>
+                <div className="flex items-center gap-2 text-gray-700">
+                  <Loader2 className="text-gray-400 animate-spin flex-shrink-0" size={16} />
+                  <span>Verifying {course.courseNumber} policy compliance...</span>
                 </div>
 
-                <div className="flex items-center gap-3 p-3 bg-orange-50 rounded-lg border border-orange-200">
-                  <Loader2 className="text-orange-600 animate-spin flex-shrink-0" size={20} />
-                  <span className="text-sm font-medium text-orange-800">
-                    Scanning for academic integrity violations...
-                  </span>
+                <div className="flex items-center gap-2 text-gray-700">
+                  <Loader2 className="text-gray-400 animate-spin flex-shrink-0" size={16} />
+                  <span>Scanning for academic integrity violations...</span>
                 </div>
               </div>
 
-              <p className="mt-6 text-xs text-gray-500">
-                This may take a few seconds. Please do not close this window.
+              <p className="mt-4 text-xs text-gray-500">
+                This may take a few seconds.
               </p>
             </div>
           </div>
@@ -652,53 +639,53 @@ export function CourseDetail() {
 
         {/* Question Form Modal */}
         {showQuestionForm && (
-          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fade-in">
-            <div className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full animate-scale-in">
-              <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-6 rounded-t-3xl">
-                <h2 className="text-3xl font-bold">Ask a Question</h2>
-                <p className="text-white/90 mt-1">Get answers from students who've taken {course.name}</p>
+          <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', zIndex: 9999 }}>
+            <div className="bg-white rounded-lg shadow-xl max-w-xl w-full">
+              <div className="border-b border-gray-200 px-6 py-4">
+                <h2 className="text-xl font-semibold text-gray-900">Ask a Question</h2>
+                <p className="text-sm text-gray-600 mt-1">Get answers from students who've taken {course.name}</p>
               </div>
-              <div className="p-8">
-                <form onSubmit={handleSubmitQuestion} className="space-y-6">
+              <div className="p-6">
+                <form onSubmit={handleSubmitQuestion} className="space-y-4">
                   <div>
-                    <label className="block text-sm font-bold text-gray-900 mb-2">
+                    <label className="block text-sm font-medium text-gray-900 mb-2">
                       Question Title *
                     </label>
                     <input
                       type="text"
                       value={questionForm.title}
                       onChange={(e) => setQuestionForm({ ...questionForm, title: e.target.value })}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cmu-red focus:border-transparent"
                       placeholder="What would you like to know?"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-bold text-gray-900 mb-2">
+                    <label className="block text-sm font-medium text-gray-900 mb-2">
                       Details *
                     </label>
                     <textarea
                       value={questionForm.body}
                       onChange={(e) => setQuestionForm({ ...questionForm, body: e.target.value })}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all resize-none"
-                      rows={6}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cmu-red focus:border-transparent resize-none"
+                      rows={5}
                       placeholder="Provide more context about your question..."
                       required
                     />
                   </div>
 
-                  <div className="flex gap-4 pt-6 border-t-2 border-gray-200">
+                  <div className="flex gap-3 pt-4 border-t border-gray-200">
                     <button
                       type="submit"
-                      className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-bold hover:shadow-2xl hover:scale-105 transition-all duration-300"
+                      className="flex-1 bg-cmu-red text-white px-4 py-2 rounded-md font-medium hover:bg-cmu-red-dark transition-colors"
                     >
                       Post Question
                     </button>
                     <button
                       type="button"
                       onClick={() => setShowQuestionForm(false)}
-                      className="px-8 py-4 rounded-xl font-bold text-gray-700 hover:bg-gray-100 transition-colors border-2 border-gray-300"
+                      className="px-4 py-2 rounded-md font-medium text-gray-700 hover:bg-gray-100 transition-colors border border-gray-300"
                     >
                       Cancel
                     </button>
